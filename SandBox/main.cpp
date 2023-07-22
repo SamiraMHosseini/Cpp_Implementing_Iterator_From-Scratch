@@ -17,19 +17,19 @@ private:
 
 		iterator()
 		{
-			mPtr = nullptr;
+			currPtr = nullptr;
 		}
 
-		iterator(Pointer mPtr)
+		iterator(Pointer currPtr)
 		{
-			this->mPtr = mPtr;
+			this->currPtr = currPtr;
 		}
 
 		// increment the iterator (pre-increment)
 		iterator operator++()
 		{
 
-			++(this->mPtr);
+			++(this->currPtr);
 			return *this;
 
 		}
@@ -39,7 +39,7 @@ private:
 		{
 
 			iterator temp = *this;
-			++(this->mPtr);
+			++(this->currPtr);
 			return temp;
 		}
 
@@ -47,36 +47,36 @@ private:
 		Pointer operator->()
 		{
 
-			if (this->mPtr == nullptr)
+			if (this->currPtr == nullptr)
 			{
 				throw std::runtime_error("Attempt to dereference a null pointer.");
 			}
-			return this->mPtr;
+			return this->currPtr;
 		}
 
 		// equality comparison
 		bool operator==(const iterator& it)
 		{
-			return (this->mPtr == it.mPtr);
+			return (this->currPtr == it.currPtr);
 		}
 
 		// inequality comparison
 		bool operator!=(const iterator& it)
 		{
-			return (this->mPtr != it.mPtr);
+			return (this->currPtr != it.currPtr);
 		}
 
 		// dereference the iterator
 		Reference operator* ()
 		{
-			if (this->mPtr == nullptr)
+			if (this->currPtr == nullptr)
 			{
 				throw std::runtime_error("Attempt to dereference a null pointer.");
 			}
-			return  *(this->mPtr);
+			return  *(this->currPtr);
 		}
 	private:
-		Pointer mPtr;
+		Pointer currPtr;
 	};
 
 public:
@@ -85,14 +85,14 @@ public:
 	{
 		try
 		{
-			this->pData = new T[capacity]();
+			this->poData = new T[capacity]();
 			this->capacity = capacity;
 		}
 		catch (const std::bad_alloc& e)
 		{
 
 			std::cout << e.what();
-			this->pData = nullptr;
+			this->poData = nullptr;
 			this->capacity = 0;
 			throw std::runtime_error("Failed to allocate memory for the array.");
 		}
@@ -101,13 +101,13 @@ public:
 	// get iterator to the beginning
 	iterator begin()
 	{
-		return iterator(this->pData);
+		return iterator(this->poData);
 	}
 
 	// get iterator to the end
 	iterator end()
 	{
-		return iterator(this->pData + this->capacity);
+		return iterator(this->poData + this->capacity);
 	}
 
 	// overloaded [] operator to provide direct access to array elements
@@ -118,7 +118,7 @@ public:
 		{
 			throw std::runtime_error("Array index out of range.");
 		}
-		T& result = this->pData[index];
+		T& result = this->poData[index];
 		return result;
 	}
 
@@ -131,15 +131,15 @@ public:
 	// destructor that deallocates memory for the array
 	~FixedSizeArray()
 	{
-		if (this->pData != nullptr)
+		if (this->poData != nullptr)
 		{
-			delete[] this->pData;
-			this->pData = nullptr;
+			delete[] this->poData;
+			this->poData = nullptr;
 		}
 	}
 	// Data------------------------------------------------
 private:
-	T* pData;              // Pointer to array of elements
+	T* poData;              // Pointer to array of elements - po means the pointer is ownded by the class
 	std::size_t capacity;  // Total capacity of the array
 
 };
@@ -150,7 +150,7 @@ int main()
 	array[0] = 10;
 	array[1] = 25;
 	array[2] = 43;
-	for (auto it = array.begin(); it!=array.end(); ++it)
+	for (auto it = array.begin(); it != array.end(); ++it)
 	{
 		std::cout << *it << '\n';
 	}
