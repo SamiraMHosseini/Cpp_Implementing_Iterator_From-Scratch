@@ -1,4 +1,4 @@
- # Implementation of Fixed Size Array with a Custom Iterator in C++
+ # Implementing Forward Iterator From Scratch in a Custom Class in C++
 
 # Description:
 
