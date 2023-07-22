@@ -4,7 +4,7 @@ template <typename T>
 class FixedSizeArray
 {
 
-public:
+private:
 	struct iterator
 	{
 		// properties of our iterator 
@@ -137,7 +137,7 @@ public:
 			this->pData = nullptr;
 		}
 	}
-
+	// Data------------------------------------------------
 private:
 	T* pData;              // Pointer to array of elements
 	std::size_t capacity;  // Total capacity of the array
@@ -150,9 +150,9 @@ int main()
 	array[0] = 10;
 	array[1] = 25;
 	array[2] = 43;
-	for (const auto& e : array)
+	for (auto it = array.begin(); it!=array.end(); ++it)
 	{
-		std::cout << e << '\n';
+		std::cout << *it << '\n';
 	}
 
 
