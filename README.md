@@ -6,7 +6,7 @@ This repository contains an implementation of a fixed-size array with a custom i
 
 The real strength of this implementation lies in its custom iterator, which adheres to the forward iterator concept. The iterator is defined as a nested struct inside the FixedSizeArray class and provides functionalities for iterating over the elements of the array.
 
-The iterator includes implementations of:
+# The iterator includes implementations of:
 
 Pre-increment and post-increment operations: These are used to advance the iterator through the array.
 
