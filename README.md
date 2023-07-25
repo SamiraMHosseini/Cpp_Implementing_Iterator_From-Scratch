@@ -1,6 +1,5 @@
  # Implementing Forward Iterator From Scratch in a Custom Class in C++
-
-# Description:
+ # Description:
 
 This repository contains an implementation of a fixed-size array with a custom iterator in C++. The FixedSizeArray class is a simple generic data structure that provides a fixed-size container for storing elements of any type.
 
